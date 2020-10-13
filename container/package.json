@@ -1,6 +1,6 @@
 {
-  "name": "@startup-code/app1",
-  "version": "0.0.0",
+  "name": "@own-prototype/container",
+  "version": "0.0.1",
   "private": true,
   "devDependencies": {
     "@babel/core": "7.11.6",

@@ -28,8 +28,8 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "app2",
-      library: { type: "var", name: "app2" },
+      name: "mfe1",
+      library: { type: "var", name: "mfe1" },
       filename: "remoteEntry.js",
       exposes: {
         "./Button": "./src/Button",
@@ -39,7 +39,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      excludeChunks: ["app2"],
+      excludeChunks: ["mfe1"],
     }),
   ],
 };

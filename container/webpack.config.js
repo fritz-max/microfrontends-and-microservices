@@ -33,9 +33,9 @@ module.exports = {
   //http://localhost:3002/remoteEntry.js
   plugins: [
     new ModuleFederationPlugin({
-      name: "app1",
+      name: "container",
       remotes: {
-        app2: "app2@http://localhost:3002/remoteEntry.js",
+        mfe1: "mfe1@http://localhost:3002/remoteEntry.js",
       },
       shared: {
         react: { singleton: true, requiredVersion: deps.react },
@@ -44,7 +44,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      excludeChunks: ["app1"],
+      excludeChunks: ["container"],
     }),
   ],
 };
