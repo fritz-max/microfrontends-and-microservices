@@ -30,7 +30,8 @@ from twisted.internet.defer import inlineCallbacks
 import os
 import argparse
 
-url = os.environ.get('CBURL', 'ws://192.168.87.195:8080/ws')
+print("Entering Publish Script")
+url = os.environ.get('CBURL', 'ws://wamp-router:8080/ws')
 realmv = os.environ.get('CBREALM', 'realm1')
 topic = os.environ.get('CBTOPIC', 'com.myapp.hello')
 print(url, realmv)
