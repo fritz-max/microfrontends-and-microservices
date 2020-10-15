@@ -19,6 +19,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
+    "autobahn": "^20.9.2",
     "chart.js": "^2.9.3",
     "html-webpack-plugin": "^4.5.0",
     "react": "^16.13.0",

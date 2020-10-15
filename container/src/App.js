@@ -12,12 +12,12 @@ const App = () => (
         <RemoteApp  />
       </React.Suspense>
     </div>
-    <h2>Rendering a single Component from the Microfrontend individually:</h2>
+    {/* <h2>Rendering a single Component from the Microfrontend individually:</h2>
     <div>
       <React.Suspense fallback="Loading Button">
         <RemoteButton />
       </React.Suspense>
-    </div>
+    </div> */}
   </div>
 );
 
