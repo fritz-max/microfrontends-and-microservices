@@ -1,20 +1,23 @@
 version: "3.8"
 services:
+
   container:
     image: "container-app:v1"
     ports:
       - "3001:3001"
+
   mfe1:
     image: "mfe1-app:v1"
     ports:
       - "3002:3002"
-  # wamp-router:
-  #   image: "crossbario/crossbar"
-  #   ports: 
-  #     - "8080:8080"
-  #   volumes: 
-  #     - "./crossbar:/node"
-  #   user: "u"
+  
+  wamp-router:
+    image: "crossbario/crossbar"
+    ports: 
+      - "8080:8080"
+    volumes: 
+      - "./crossbar:/node"
+    user: "0"
 
   instrument-service:
     image: "crossbario/autobahn-python:cpy3"
