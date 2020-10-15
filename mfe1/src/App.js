@@ -1,9 +1,7 @@
 import LocalButton from "./Button";
 import React from "react";
+import Subscriber from './Subscriber'
 
-// import LineExample from "./LineGraph";
-
-var autobahn = require('autobahn')
 
 const App = () => (
   <div style={
@@ -11,6 +9,7 @@ const App = () => (
   }>
     <h1>Microfrontend</h1>
     {/* <LineExample /> */}
+    <Subscriber />
     <LocalButton />
   </div>
 );
