@@ -1,34 +1,30 @@
 version: "3.8"
 services:
 
-  container:
-    image: "container-app:v1"
+  composite-ui:
+    image: "composite-ui:v1"
     ports:
       - "3001:3001"
 
-  mfe1:
-    image: "mfe1-app:v1"
-    ports:
-      - "3002:3002"
-  
-  wamp-router:
+  crossbar-router:
     image: "crossbario/crossbar"
     ports: 
       - "8080:8080"
     volumes: 
-      - "./crossbar:/node"
+      - "./crossbar-router:/node"
     user: "0"
 
-  instrument-service:
+  instrument1-service:
     image: "crossbario/autobahn-python:cpy3"
     environment: 
-      - CBURL=ws://localhost:8080/ws
+      - CBURL=ws://crossbar-router:8080/ws
       - CBREALM=realm1
     volumes: 
-      - "./crossbar:/app"
+      - "./instrument1-service:/app"
     command: python /app/1.hello-world/client_component_publish.py
 
-
-    # docker run -v $PWD:/app -e CBURL="ws://crossbar:8080/ws" 
-    # -e CBREALM="realm1" --link=crossbar --rm -it
-    # crossbario/autobahn-python:cpy3 python /app/1.hello-world/client_component_publish.py
+  instrument1-mfe:
+    image: "instrument1-mfe:v1"
+    ports:
+      - "3002:3002"
+  
