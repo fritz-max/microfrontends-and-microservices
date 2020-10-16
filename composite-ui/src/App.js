@@ -5,8 +5,8 @@ const RemoteApp = React.lazy(() => import("mfe1/App"));
 
 const App = () => (
   <div>
-    <h1>This is the Container</h1>
-    <h2>Rendering complete Microfrontend:</h2>
+    <h1>Prototype Composite UI</h1>
+    <h2>Instrument 1 Microfrontend:</h2>
     <div style={{width: "1000px"}}>
       <React.Suspense fallback="Loading App">
         <RemoteApp  />
