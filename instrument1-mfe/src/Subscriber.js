@@ -12,8 +12,6 @@ function Subscriber () {
       realm: 'realm1'
     })
 
-    // Important to use an arrow function here. It automatically binds it to the context of the object, 
-    // so that "this." can be used. 
     autobahnConnection.onopen = (session, details) => {
         console.log("Established and openend autobahn connection.")
         setConnStatus(1);
@@ -26,10 +24,7 @@ function Subscriber () {
 
     autobahnConnection.open();
   }, []) 
-  // ^ IMPORTANT: the second param to useEffect is the condition. 
-  // Passing nothing: run after every render (can be constrained by a condition, in an array)
-  // Passing an empty arraay: run once after mounting (= old componentDidMount)
-
+  
   return (
     <div>
         <p>Subscriber Component</p>
