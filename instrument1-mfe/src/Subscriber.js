@@ -1,49 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect }from 'react';
 import autobahn from 'autobahn-browser';
 
-class Subscriber extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        connectionStatus: 0,
-        currentMessage: ""
-      };
-      this.setMsgState = this.setMsgState.bind(this);
-    }
 
-    setMsgState(newMessage) {
-        this.setState(currentState => {
-            return { currentMessage: newMessage };
+function Subscriber () {
+  const [currentMsg, setCurrentMsg] = useState("");
+  const [connectionStatus, setConnStatus] = useState(0);
+
+  useEffect(() => {
+    var autobahnConnection = new autobahn.Connection({
+      url: 'ws://localhost:8080/ws',
+      realm: 'realm1'
+    })
+
+    // Important to use an arrow function here. It automatically binds it to the context of the object, 
+    // so that "this." can be used. 
+    autobahnConnection.onopen = (session, details) => {
+        console.log("Established and openend autobahn connection.")
+        setConnStatus(1);
+        
+        session.subscribe("com.myapp.hello", (args) => {
+            console.log('Received Message: ', args[0])
+            setCurrentMsg(args[0]);
         });
     }
 
-    componentDidMount() {
+    autobahnConnection.open();
+  }, []) 
+  // ^ IMPORTANT: the second param to useEffect is the condition. 
+  // Passing nothing: run after every render (can be constrained by a condition, in an array)
+  // Passing an empty arraay: run once after mounting (= old componentDidMount)
 
-        var autobahnConnection = new autobahn.Connection({
-            url: 'ws://localhost:8080/ws',
-            realm: 'realm1'
-        })
-
-        autobahnConnection.onopen = (session, details) => {
-            console.log("Established and openend autobahn connection.")
-            
-            session.subscribe("com.myapp.hello", (args) => {
-                console.log('Received Message: ', args[0])
-                this.setMsgState(args[0]);
-            });
-        }
-
-        autobahnConnection.open();    
-    }
-  
-    render() {
-      return (
-        <div>
-            <p>Subscriber Component</p>
-            <p>Message: {this.state.currentMessage}</p>
-        </div>
-      );
-    }
-  }
+  return (
+    <div>
+        <p>Subscriber Component</p>
+        <p>Connection Status: {connectionStatus}</p>
+        <p>Current Message: {currentMsg}</p>
+    </div>
+  );
+}
 
 export default Subscriber;
