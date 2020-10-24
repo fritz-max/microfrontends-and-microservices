@@ -1,6 +1,7 @@
 import LocalButton from "./Button";
 import React from "react";
 import Subscriber from './Subscriber'
+import LineExample from './LineGraph'
 
 
 const App = () => (
@@ -8,8 +9,8 @@ const App = () => (
     {backgroundColor: "WhiteSmoke", textAlign: "center"}
   }>
     <h1>Microfrontend</h1>
-    {/* <LineExample /> */}
-    <Subscriber />
+    <LineExample />
+    {/* <Subscriber /> */}
     <LocalButton />
   </div>
 );

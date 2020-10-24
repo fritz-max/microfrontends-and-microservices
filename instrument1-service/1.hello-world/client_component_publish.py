@@ -29,26 +29,26 @@ from autobahn.twisted.util import sleep
 from twisted.internet.defer import inlineCallbacks
 import os
 import argparse
+import numpy as np
 
-print("Entering Publish Script")
-url = os.environ.get('CBURL', 'ws://wamp-router:8080/ws')
+url = os.environ.get('CBURL', 'ws://localhost:8080/ws')
 realmv = os.environ.get('CBREALM', 'realm1')
 topic = os.environ.get('CBTOPIC', 'com.myapp.hello')
 print(url, realmv)
 component = Component(transports=url, realm=realmv)
+N = np.random.randint(20, 100)
+signal = (np.linspace(1, 100, N)**3)[::-1]
 
 
 @component.on_join
 @inlineCallbacks
 def joined(session, details):
-    print("session ready")
-    counter = 0
+    i = 0
     while True:
         # publish() only returns a Deferred if we asked for an acknowledgement
-        session.publish(topic , "Hello World %d"%counter)
-        print("Published message %d"%counter)
-        counter += 1
-        yield sleep(1)
+        session.publish(topic , i, signal[i%N]+np.random.randint(1000))
+        i += 1
+        yield sleep(0.1)
 
 
 
