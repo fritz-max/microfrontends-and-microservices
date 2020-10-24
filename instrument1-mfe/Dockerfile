@@ -18,5 +18,8 @@ COPY . .
 # Uses port which is used by the actual application
 EXPOSE 3002
  
+
+RUN yarn build
+ 
 # Finally runs the application
-CMD [ "yarn", "start" ]
+CMD [ "yarn", "serve" ]

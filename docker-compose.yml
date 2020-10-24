@@ -2,7 +2,7 @@ version: "3.3"
 services:
 
   composite-ui:
-    image: "composite-ui:v1"
+    image: "composite-ui:v2"
     ports:
       - "3001:3001"
 
@@ -24,7 +24,7 @@ services:
     command: python /app/1.hello-world/client_component_publish.py
 
   instrument1-mfe:
-    image: "instrument1-mfe:v1"
+    image: "instrument1-mfe:v2"
     ports:
       - "3002:3002"
   
