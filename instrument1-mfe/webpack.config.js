@@ -32,7 +32,6 @@ module.exports = {
       library: { type: "var", name: "mfe1" },
       filename: "remoteEntry.js",
       exposes: {
-        "./Button": "./src/Button",
         "./App": "./src/App"
       },
       shared: { react: { singleton: true }, "react-dom": { singleton: true }}

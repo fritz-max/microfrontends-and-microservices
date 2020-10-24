@@ -1,17 +1,12 @@
-import LocalButton from "./Button";
 import React from "react";
-import Subscriber from './Subscriber'
-import LineExample from './LineGraph'
-
+import Graph from './instrumentGraph'
 
 const App = () => (
   <div style={
     {backgroundColor: "WhiteSmoke", textAlign: "center"}
   }>
     <h1>Microfrontend</h1>
-    <LineExample />
-    {/* <Subscriber /> */}
-    <LocalButton />
+    <Graph />
   </div>
 );
 
