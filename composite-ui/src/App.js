@@ -1,6 +1,5 @@
 import React from "react";
 
-const RemoteButton = React.lazy(() => import("mfe1/Button"));
 const RemoteApp = React.lazy(() => import("mfe1/App"));
 
 const App = () => (
@@ -12,12 +11,6 @@ const App = () => (
         <RemoteApp  />
       </React.Suspense>
     </div>
-    {/* <h2>Rendering a single Component from the Microfrontend individually:</h2>
-    <div>
-      <React.Suspense fallback="Loading Button">
-        <RemoteButton />
-      </React.Suspense>
-    </div> */}
   </div>
 );
 
