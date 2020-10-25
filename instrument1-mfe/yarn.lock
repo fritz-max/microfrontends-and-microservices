@@ -1929,6 +1929,18 @@ chartjs-color@^2.1.0:
     chartjs-color-string "^0.6.0"
     color-convert "^1.9.3"
 
+chartjs-plugin-streaming@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/chartjs-plugin-streaming/-/chartjs-plugin-streaming-1.8.0.tgz#3cafcf5e733dbbe0de3ac39df00c65075d83bc5c"
+  integrity sha512-r7kHyNvSAz12J+W5FBmI/K400z4MXqfNYhA5xaTKJ6PA3ZA6Vq+2d5/OCGyVZF/7UsUDWDRK5tHHYj8jqe+nOg==
+
+chartjs-plugin-zoom@^0.7.7:
+  version "0.7.7"
+  resolved "https://registry.yarnpkg.com/chartjs-plugin-zoom/-/chartjs-plugin-zoom-0.7.7.tgz#b25989bd6183cc51d5bb9293c20b4b7942555584"
+  integrity sha512-8fOHPPiZTT2+K0w278TQWYs/DtPg06s1OpTqdXxPpdfH7QQbl6Io/WuE1FjPehDWVCxpe3tSTts+dPbxgq2Z5g==
+  dependencies:
+    hammerjs "^2.0.8"
+
 chokidar@^2.1.8:
   version "2.1.8"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.1.8.tgz#804b3a7b6a99358c3c5c61e71d8728f041cff917"
@@ -3386,6 +3398,11 @@ grouped-queue@^1.1.0:
   dependencies:
     lodash "^4.17.15"
 
+hammerjs@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/hammerjs/-/hammerjs-2.0.8.tgz#04ef77862cff2bb79d30f7692095930222bf60f1"
+  integrity sha1-BO93hiz/K7edMPdpIJWTAiK/YPE=
+
 handle-thing@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-2.0.1.tgz#857f79ce359580c340d43081cc648970d0bb234e"
@@ -3502,7 +3519,7 @@ html-minifier-terser@^5.0.1:
     relateurl "^0.2.7"
     terser "^4.6.3"
 
-html-webpack-plugin@^4.5.0:
+html-webpack-plugin@4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/html-webpack-plugin/-/html-webpack-plugin-4.5.0.tgz#625097650886b97ea5dae331c320e3238f6c121c"
   integrity sha512-MouoXEYSjTzCrjIxWwg8gxL5fE2X2WZJLmBYXlaJhQUH5K/b5OrqmV7T4dB7iu0xkmJ6JlUuV6fFVtnqbPopZw==
