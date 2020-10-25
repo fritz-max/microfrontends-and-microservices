@@ -51,6 +51,9 @@ const initialOptions = {
             //   });
             // },
           }
+      }],
+      yAxes: [{
+          type: 'linear'
       }]
     },
     plugins: {
@@ -91,11 +94,21 @@ class Graph extends React.Component {
             graphData: initialState,
             graphOptions: initialOptions
         }
-        this.buttonClick = this.buttonClick.bind(this);
+        this.handleAxisTypeToggle = this.handleAxisTypeToggle.bind(this);
+        this.handlePauseToggle = this.handlePauseToggle.bind(this);
     }
 
-    buttonClick () {
 
+    handlePauseToggle () {
+        var newStateOptions = this.state.graphOptions
+        newStateOptions.scales.xAxes[0].realtime.pause = !newStateOptions.scales.xAxes[0].realtime.pause
+        this.setState({graphOptions: newStateOptions})
+        }
+
+    handleAxisTypeToggle () {
+        var newStateOptions = this.state.graphOptions
+        newStateOptions.scales.yAxes[0].type = newStateOptions.scales.yAxes[0].type == "linear" ? "logarithmic" : "linear"
+        this.setState({graphOptions: newStateOptions})
     }
     
 	componentDidMount(){
@@ -107,7 +120,7 @@ class Graph extends React.Component {
 
         this.autobahnConnection.onopen = (session, details) => {
             session.subscribe("com.myapp.hello", (args) => {
-                console.log('Received Message: ', args[0])
+                // console.log('Received Message: ', args[0])
 
                 var oldDataSet = this.state.graphData.datasets[0];
                 var newDataSet = {
@@ -134,15 +147,18 @@ class Graph extends React.Component {
         this.autobahnConnection.open();
 
     }
-    
+
     componentWillUnmount() {
         this.autobahnConnection.close();
     }
 
 	render() {
 		return (
+            <div>
 			<Line data={this.state.graphData} options={this.state.graphOptions}/>
-            // <button >Pause</button>
+            <button onClick={this.handlePauseToggle}>Pause</button>
+            <button onClick={this.handleAxisTypeToggle}>Axis Type</button>
+            </div>
 		);
 	}
 }
