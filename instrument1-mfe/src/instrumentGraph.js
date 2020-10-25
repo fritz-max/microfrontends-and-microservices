@@ -1,11 +1,12 @@
 import React from 'react';
-import {Line} from 'react-chartjs-2';
+import {Line, Chart} from 'react-chartjs-2';
+import 'chartjs-plugin-zoom';
+import 'chartjs-plugin-streaming';
 
 import autobahn from 'autobahn-browser';
 
 
 const initialState = {
-  labels: [1,2,3,4,5,6,7],
   datasets: [
     {
       label: 'My First dataset',
@@ -26,20 +27,75 @@ const initialState = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: [65, 59, 80, 81, 56, 55, 40]
+      data: []
     }
   ]
 };
 
+const initialOptions = {
+    scales: {
+      xAxes: [{
+        type: 'realtime',
+        realtime: {
+            duration: 20000,    // data in the past 20000 ms will be displayed
+            refresh: 1000,      // onRefresh callback will be called every 1000 ms
+            delay: 1000,        // delay of 1000 ms, so upcoming values are known before plotting a line
+            pause: false,       // chart is not paused
+            ttl: undefined,     // data will be automatically deleted as it disappears off the chart
+            // onRefresh: function(chart) {
+            //   chart.data.datasets.forEach(function(dataset) {
+            //     dataset.data.push({
+            //       x: Date.now(),
+            //       y: Math.random()
+            //     });
+            //   });
+            // },
+          }
+      }]
+    },
+    plugins: {
+        streaming: {
+            frameRate: 30
+        }
+    },
+    animation: {
+        duration: 0
+    }
+    // // Assume x axis is the realtime scale
+    // pan: {
+    //     enabled: true,    // Enable panning
+    //     mode: 'x',        // Allow panning in the x direction
+    //     rangeMin: {
+    //         x: null       // Min value of the delay option
+    //     },
+    //     rangeMax: {
+    //         x: null       // Max value of the delay option
+    //     }
+    // },
+    // zoom: {
+    //     enabled: true,    // Enable zooming
+    //     mode: 'x',        // Allow zooming in the x direction
+    //     rangeMin: {
+    //         x: null       // Min value of the duration option
+    //     },
+    //     rangeMax: {
+    //         x: null       // Max value of the duration option
+    //     }
+    // }
+};
 
 class Graph extends React.Component {
     constructor () {
         super()
-        this.state = {}
+        this.state = {
+            graphData: initialState,
+            graphOptions: initialOptions
+        }
+        this.buttonClick = this.buttonClick.bind(this);
     }
-    
-    componentWillMount(){
-		this.setState({graphData: initialState});
+
+    buttonClick () {
+
     }
     
 	componentDidMount(){
@@ -58,14 +114,15 @@ class Graph extends React.Component {
                     ...oldDataSet
                 };
                 
-                var newData = [...newDataSet.data, args[1]];        
+                var newData = [...newDataSet.data, 
+                    {
+                        x: Date.now(),
+                        y: args[1]
+                    }
+                ];        
                 newDataSet.data = newData;
 
-                var oldLabels = this.state.graphData.labels;
-                var newLabels = [...oldLabels, args[0]]
-
                 var newState = {
-                    labels: newLabels,
                     datasets: [newDataSet]
                 };
 
@@ -84,7 +141,8 @@ class Graph extends React.Component {
 
 	render() {
 		return (
-			<Line data={this.state.graphData} />
+			<Line data={this.state.graphData} options={this.state.graphOptions}/>
+            // <button >Pause</button>
 		);
 	}
 }
