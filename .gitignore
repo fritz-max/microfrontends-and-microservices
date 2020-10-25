@@ -4,3 +4,6 @@ dist/
 
 key.priv
 key.pub
+
+crossbar-router/.crossbar/node.pid
+instrument1-mfe/package-lock.json
