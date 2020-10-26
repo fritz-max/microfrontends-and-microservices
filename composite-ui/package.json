@@ -1,5 +1,5 @@
 {
-  "name": "@own-prototype/container",
+  "name": "@skytem-prototype/composite-ui",
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
@@ -10,7 +10,7 @@
     "serve": "11.3.2",
     "webpack": "5.2.0",
     "webpack-cli": "4.0.0",
-    "webpack-dev-server": "3.11.0"
+    "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
     "start": "webpack-cli serve --host 0.0.0.0",

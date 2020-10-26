@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const path = require("path");
 const deps = require("./package.json").dependencies;
+
 module.exports = {
   entry: {
     // we add an entrypoint with the same name as our name in ModuleFederationPlugin.
@@ -33,18 +34,18 @@ module.exports = {
   //http://localhost:3002/remoteEntry.js
   plugins: [
     new ModuleFederationPlugin({
-      name: "container",
+      name: "composite-ui",
       remotes: {
         mfe1: "mfe1@http://localhost:3002/remoteEntry.js",
       },
       shared: {
-        react: { singleton: true, requiredVersion: deps.react },
+        "react": { singleton: true, requiredVersion: deps.react },
         "react-dom": { singleton: true, requiredVersion: deps["react-dom"] }
       },
     }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      excludeChunks: ["container"],
+      excludeChunks: ["composite-ui"],
     }),
   ],
 };

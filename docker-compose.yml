@@ -1,10 +1,13 @@
 version: "3.3"
 services:
-
+  
   composite-ui:
-    image: "composite-ui:v2"
+    build: ./composite-ui
+    image: "composite-ui:compose-build-v1"
     ports:
       - "3001:3001"
+    volumes: 
+      - "./composite-ui/src:/usr/src/composite-ui/src"
 
   crossbar-router:
     image: "crossbario/crossbar"
@@ -22,9 +25,30 @@ services:
     volumes: 
       - "./instrument1-service:/app"
     command: python /app/mock_component/client_component_publish.py
+  instrument1-mfe:
+    build: ./instrument1-mfe
+    image: "instrument1-mfe:compose-build-v1"
+    ports:
+      - "3002:3002"
+    volumes: 
+      - "./instrument1-mfe/src:/usr/src/mfe1/src"
 
-  # instrument1-mfe:
-  #   image: "instrument1-mfe:v3"
-  #   ports:
-  #     - "3002:3002"
-  
+
+# composite-ui:
+#   image: "node:10"
+#   ports:
+#     - "3001:3001"
+#   volumes: 
+#     - "./composite-ui:/usr/src/composite-ui"
+#   working_dir: "/usr/src/composite-ui"
+#   command: yarn start
+
+
+# instrument1-mfe:
+#   image: "node:10"
+#   ports:
+#     - "3002:3002"
+#   volumes:
+#     - "./instrument1-mfe:/usr/src/mfe1"
+#   working_dir: "/usr/src/mfe1"
+#   command: yarn start 
