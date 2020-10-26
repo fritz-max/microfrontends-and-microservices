@@ -2,9 +2,13 @@ version: "3.3"
 services:
 
   composite-ui:
-    image: "composite-ui:v2"
+    image: "node:10"
     ports:
       - "3001:3001"
+    volumes: 
+      - "./composite-ui:/usr/src/composite-ui"
+    working_dir: "/usr/src/composite-ui"
+    command: yarn start
 
   crossbar-router:
     image: "crossbario/crossbar"
@@ -23,8 +27,13 @@ services:
       - "./instrument1-service:/app"
     command: python /app/1.hello-world/client_component_publish.py
 
-  # instrument1-mfe:
-  #   image: "instrument1-mfe:v3"
-  #   ports:
-  #     - "3002:3002"
+  instrument1-mfe:
+    image: "node:10"
+    ports:
+      - "3002:3002"
+    volumes:
+      - "./instrument1-mfe:/usr/src/mfe1"
+    working_dir: "/usr/src/mfe1"
+    command: yarn start 
+
   

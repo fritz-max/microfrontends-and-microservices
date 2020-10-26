@@ -6,20 +6,11 @@ FROM node:10
 # Becomes more relevant when using Docker Compose later
 WORKDIR /usr/src/container-app
  
-# Copies package.json and package-lock.json to Docker environment
-COPY package*.json ./
+# # Copies package.json and package-lock.json to Docker environment
+# COPY package*.json ./
  
-# Installs all node packages
-RUN yarn install
- 
-# Copies everything over to Docker environment
-COPY . .
- 
+# # Installs all node packages
+# RUN yarn install
+  
 # Uses port which is used by the actual application
 EXPOSE 3001
-
-RUN yarn build
- 
-# Finally runs the application
-CMD [ "yarn", "serve" ]
-
