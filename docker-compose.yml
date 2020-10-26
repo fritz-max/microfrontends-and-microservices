@@ -3,7 +3,7 @@ services:
   
   composite-ui:
     build: ./composite-ui
-    image: "composite-ui:compose-build1-v1"
+    image: "composite-ui:compose-build-v1"
     ports:
       - "3001:3001"
     volumes: 
@@ -28,7 +28,7 @@ services:
    
   instrument1-mfe:
     build: ./instrument1-mfe
-    image: "instrument1-mfe:compose-build1-v1"
+    image: "instrument1-mfe:compose-build-v1"
     ports:
       - "3002:3002"
     volumes: 
