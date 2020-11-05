@@ -1,5 +1,5 @@
 {
-  "name": "@skytem-prototype/composite-ui",
+  "name": "@skytem-prototype/mfe2",
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
@@ -16,11 +16,18 @@
   "scripts": {
     "start": "webpack-cli serve --host 0.0.0.0",
     "build": "webpack --mode production",
-    "serve": "serve dist -p 3001",
+    "serve": "serve dist -p 3003",
     "clean": "rm -rf dist"
   },
   "dependencies": {
+    "autobahn-browser": "^20.9.2",
+    "chart.js": "^2.9.3",
+    "chartjs-plugin-streaming": "^1.8.0",
+    "chartjs-plugin-zoom": "^0.7.7",
     "react": "^16.13.0",
-    "react-dom": "^16.13.0"
+    "react-chartjs-2": "^2.10.0",
+    "react-dom": "^16.13.0",
+    "sockjs": "^0.3.21",
+    "webpack-cli": "^4.2.0"
   }
 }

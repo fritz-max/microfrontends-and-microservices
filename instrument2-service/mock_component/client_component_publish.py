@@ -32,14 +32,14 @@ import numpy as np
 
 url = os.environ.get('CBURL', 'ws://localhost:8080/ws')
 realmv = os.environ.get('CBREALM', 'realm1')
-topic = os.environ.get('CBTOPIC', 'com.myapp.hello/instrument1')
+topic = os.environ.get('CBTOPIC', 'com.myapp.hello/instrument2')
 component = Component(transports=url, realm=realmv)
 
 class MockInstrument:
     def __init__(self):
         self.N = 100
         self._i = 0
-        self.signal = (np.linspace(1, 100+1, 100)**3)[::-1]
+        self.signal = - (np.linspace(1, 100+1, 100)**3)[::-1]
 
     def get_measurement(self):
         self._i += 1

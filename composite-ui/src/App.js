@@ -1,6 +1,8 @@
 import React from "react";
 
-const RemoteApp = React.lazy(() => import("mfe1/App"));
+const RemoteApp1 = React.lazy(() => import("mfe1/App"));
+const RemoteApp2 = React.lazy(() => import("mfe2/App"));
+
 
 const App = () => (
   <div>
@@ -8,7 +10,13 @@ const App = () => (
     <h2>Instrument 1 Microfrontend:</h2>
     <div style={{width: "1000px"}}>
       <React.Suspense fallback="Loading App">
-        <RemoteApp  />
+        <RemoteApp1  />
+      </React.Suspense>
+    </div>
+    <h2>Instrument 2 Microfrontend:</h2>
+    <div style={{width: "1000px"}}>
+      <React.Suspense fallback="Loading App">
+        <RemoteApp2  />
       </React.Suspense>
     </div>
   </div>

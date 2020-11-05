@@ -67,7 +67,7 @@ class Graph extends React.Component {
         })
 
         this.autobahnConnection.onopen = (session, details) => {
-            session.subscribe("com.myapp.hello/instrument1", (args) => {
+            session.subscribe("com.myapp.hello/instrument2", (args) => {
 
                 var newDataSet = this.state.graphData.datasets[0];
                 newDataSet.data = [...newDataSet.data,

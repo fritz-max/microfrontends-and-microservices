@@ -5,18 +5,14 @@ const deps = require("./package.json").dependencies;
 
 module.exports = {
   entry: {
-    // we add an entrypoint with the same name as our name in ModuleFederationPlugin.
-    // This merges the two "chunks" together. When a remoteEntry is placed on the page,
-    // the code in this app1 entrypoint will execute as part of the remoteEntry startup.
     main: "./src/index",
   },
   mode: "development",
   devServer: {
     contentBase: path.join(__dirname, "dist"),
-    port: 3001,
+    port: 3003,
   },
   output: {
-    // public path can be what it normally is, not a absolute, hardcoded url
     publicPath: "auto",
   },
   module: {
@@ -31,13 +27,13 @@ module.exports = {
       },
     ],
   },
-  //http://localhost:3002/remoteEntry.js
   plugins: [
     new ModuleFederationPlugin({
-      name: "composite-ui",
-      remotes: {
-        mfe1: "mfe1@http://localhost:3002/remoteEntry.js",
-        mfe2: "mfe2@http://localhost:3003/remoteEntry.js"
+      name: "mfe2",
+      library: { type: "var", name: "mfe2" },
+      filename: "remoteEntry.js",
+      exposes: {
+        "./App": "./src/App"
       },
       shared: {
         "react": { singleton: true, requiredVersion: deps.react },
@@ -46,7 +42,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      excludeChunks: ["composite-ui"],
+      excludeChunks: ["mfe2"],
     }),
   ],
 };
