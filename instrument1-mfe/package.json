@@ -5,11 +5,12 @@
   "devDependencies": {
     "@babel/core": "7.11.6",
     "@babel/preset-react": "7.10.4",
+    "@webpack-cli/serve": "^1.1.0",
     "babel-loader": "8.1.0",
     "html-webpack-plugin": "4.5.0",
     "serve": "11.3.2",
     "webpack": "5.2.0",
-    "webpack-cli": "4.0.0",
+    "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
@@ -26,6 +27,7 @@
     "react": "^16.13.0",
     "react-chartjs-2": "^2.10.0",
     "react-dom": "^16.13.0",
-    "sockjs": "^0.3.21"
+    "sockjs": "^0.3.21",
+    "webpack-cli": "^4.2.0"
   }
 }
