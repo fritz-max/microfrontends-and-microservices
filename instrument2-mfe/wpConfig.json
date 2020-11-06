@@ -1,0 +1,9 @@
+{
+    "name": "mfe2",
+    "type": "library",
+    "port": 3003,
+    "remoteContainers": {},
+    "exposedModules": {
+        "./App": "./src/App"
+    }
+}

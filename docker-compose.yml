@@ -8,6 +8,7 @@ services:
       - "3001:3001"
     volumes: 
       - "./composite-ui/src:/usr/src/composite-ui/src"
+      - "./wpConfig.json:/usr/src/composite-ui/config/wpConfig.json"
 
   crossbar-router:
     image: "crossbario/crossbar"
@@ -34,6 +35,9 @@ services:
       - "3002:3002"
     volumes: 
       - "./instrument1-mfe/src:/usr/src/mfe1/src"
+      - "./wpConfig.json:/usr/src/mfe1/config/wpConfig.json"
+      # - "./node_modules"
+
 
   instrument2-service:
     image: "crossbario/autobahn-python:cpy3"
@@ -52,3 +56,5 @@ services:
       - "3003:3003"
     volumes: 
       - "./instrument2-mfe/src:/usr/src/mfe2/src"
+      - "./wpConfig.json:/usr/src/mfe2/config/wpConfig.json"
+      # - "./node_modules"

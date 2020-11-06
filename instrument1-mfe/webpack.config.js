@@ -2,6 +2,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const path = require("path");
 const deps = require("./package.json").dependencies;
+const moduleName = require("./package.json").name.split("/")[1];
+const extConfig = require("./config/wpConfig.json").webpackContainers[moduleName];
 
 module.exports = {
   entry: {
@@ -10,7 +12,7 @@ module.exports = {
   mode: "development",
   devServer: {
     contentBase: path.join(__dirname, "dist"),
-    port: 3002,
+    port: extConfig.port,
   },
   output: {
     publicPath: "auto",
@@ -29,12 +31,10 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "mfe1",
-      library: { type: "var", name: "mfe1" },
+      name: moduleName,
+      library: { type: "var", name: moduleName },
       filename: "remoteEntry.js",
-      exposes: {
-        "./App": "./src/App"
-      },
+      exposes: extConfig.exposedModules,
       shared: {
         "react": { singleton: true, requiredVersion: deps.react },
         "react-dom": { singleton: true, requiredVersion: deps["react-dom"] }
@@ -42,7 +42,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      excludeChunks: ["mfe1"],
+      excludeChunks: [moduleName],
     }),
   ],
 };

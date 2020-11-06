@@ -2,6 +2,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const path = require("path");
 const deps = require("./package.json").dependencies;
+const moduleName = require("./package.json").name.split("/")[1];
+const extConfig = require("./config/wpConfig.json").webpackContainers[moduleName];
+// const extConfig = require("../wpConfig.json").webpackContainers[moduleName];
 
 module.exports = {
   entry: {
@@ -10,10 +13,13 @@ module.exports = {
   mode: "development",
   devServer: {
     contentBase: path.join(__dirname, "dist"),
-    port: 3003,
+    port: extConfig.port,
   },
   output: {
     publicPath: "auto",
+  },
+  resolve: {
+    modules: ['node_modules']
   },
   module: {
     rules: [
@@ -24,17 +30,22 @@ module.exports = {
         options: {
           presets: ["@babel/preset-react"],
         },
-      },
+      }
+      // {
+      //   test: /\.m?js/,
+      //   loader: "babel-loader",
+      //   resolve: {
+      //     fullySpecified: false
+      //   }
+      // }
     ],
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "mfe2",
-      library: { type: "var", name: "mfe2" },
+      name: moduleName,
+      library: { type: "var", name: moduleName },
       filename: "remoteEntry.js",
-      exposes: {
-        "./App": "./src/App"
-      },
+      exposes: extConfig.exposedModules,
       shared: {
         "react": { singleton: true, requiredVersion: deps.react },
         "react-dom": { singleton: true, requiredVersion: deps["react-dom"] }
@@ -42,7 +53,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      excludeChunks: ["mfe2"],
+      excludeChunks: [moduleName],
     }),
   ],
 };

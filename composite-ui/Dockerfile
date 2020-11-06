@@ -6,8 +6,8 @@ FROM node:10
 # Becomes more relevant when using Docker Compose later
 WORKDIR /usr/src/composite-ui
  
-# Copies package.json and package-lock.json to Docker environment
-COPY package*.json ./
+# Copies package.json to Docker environment
+COPY package.json ./
  
 # Installs all node packages
 RUN yarn install

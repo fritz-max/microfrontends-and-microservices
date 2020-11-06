@@ -7,7 +7,7 @@ FROM node:10
 WORKDIR /usr/src/mfe1
  
 # Copies package.json and package-lock.json to Docker environment
-COPY package*.json ./
+COPY package.json ./
  
 # Installs all node packages
 RUN yarn install

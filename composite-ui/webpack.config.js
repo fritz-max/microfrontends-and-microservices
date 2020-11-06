@@ -2,18 +2,17 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const path = require("path");
 const deps = require("./package.json").dependencies;
+const moduleName = require("./package.json").name.split("/")[1];
+const extConfig = require("./config/wpConfig.json").webpackContainers[moduleName];
 
 module.exports = {
   entry: {
-    // we add an entrypoint with the same name as our name in ModuleFederationPlugin.
-    // This merges the two "chunks" together. When a remoteEntry is placed on the page,
-    // the code in this app1 entrypoint will execute as part of the remoteEntry startup.
     main: "./src/index",
   },
   mode: "development",
   devServer: {
     contentBase: path.join(__dirname, "dist"),
-    port: 3001,
+    port: extConfig.port,
   },
   output: {
     // public path can be what it normally is, not a absolute, hardcoded url
@@ -31,14 +30,11 @@ module.exports = {
       },
     ],
   },
-  //http://localhost:3002/remoteEntry.js
   plugins: [
     new ModuleFederationPlugin({
-      name: "composite-ui",
-      remotes: {
-        mfe1: "mfe1@http://localhost:3002/remoteEntry.js",
-        mfe2: "mfe2@http://localhost:3003/remoteEntry.js"
-      },
+      name: moduleName,
+      // PROBLEM COULD BE that before, the names of "mfe1, mfe2" were not strings? look that up
+      remotes: extConfig.remoteContainers,
       shared: {
         "react": { singleton: true, requiredVersion: deps.react },
         "react-dom": { singleton: true, requiredVersion: deps["react-dom"] }
@@ -46,7 +42,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      excludeChunks: ["composite-ui"],
+      excludeChunks: [moduleName],
     }),
   ],
 };
