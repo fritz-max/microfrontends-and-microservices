@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   
-  composite-ui:
+  airvisor:
     airvisor:
     image: airvisor:v1
     build:
@@ -15,22 +15,22 @@ services:
     environment:
     - CHOKIDAR_USEPOLLING=true
 
-  crossbar-router:
+  crossbar_router:
     image: "crossbario/crossbar"
     ports: 
       - "8080:8080"
     volumes: 
-      - "./crossbar-router:/node"
+      - "./crossbar_router:/node"
     user: "0"
 
-  instrument1-service:
+  instrument1_service:
     image: "crossbario/autobahn-python:cpy3"
     environment: 
       - CBURL=ws://crossbar-router:8080/ws
       - CBREALM=realm1
       - CBTOPIC=com.myapp.hello/instrument1
     volumes: 
-      - "./instrument1-service:/app"
+      - "./instrument1_service:/app"
     command: python /app/mock_component/client_component_publish.py
     
   instrument1_mfe:
