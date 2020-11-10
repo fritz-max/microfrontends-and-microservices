@@ -1,14 +1,14 @@
 import React from "react";
 import autobahn from 'autobahn-browser';
 
-const config = require("../configfile.json");
+const config = require("../configfile.json").connection;
 
 class Connection extends React.Component {
     constructor() {
         super()
         this.connection = new autobahn.Connection({
-            url: config.wampRouter.url,
-            realm: config.wampRouter.realm
+            url: config.router.url,
+            realm: config.router.realm
         })
     }
 

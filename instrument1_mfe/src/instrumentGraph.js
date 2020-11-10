@@ -3,7 +3,7 @@ import {Line, Chart} from 'react-chartjs-2';
 import 'chartjs-plugin-zoom';
 import 'chartjs-plugin-streaming';
 
-const config = require("../configfile.json");
+const config = require("../configfile.json").connection;
 import Connection from './wamp';
 
 
@@ -63,7 +63,7 @@ class Graph extends React.Component {
     }
 
     componentDidMount(){
-        this.wampConnection.subscribe(config.instrument, (args) => {
+        this.wampConnection.subscribe(config.topic, (args) => {
             var newDataSet = this.state.graphData.datasets[0];
             newDataSet.data = [...newDataSet.data,
                 {

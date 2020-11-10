@@ -2,7 +2,6 @@ version: "3.3"
 services:
   
   airvisor:
-    airvisor:
     image: airvisor:v1
     build:
       context: ./airvisor
@@ -26,7 +25,7 @@ services:
   instrument1_service:
     image: "crossbario/autobahn-python:cpy3"
     environment: 
-      - CBURL=ws://crossbar-router:8080/ws
+      - CBURL=ws://crossbar_router:8080/ws
       - CBREALM=realm1
       - CBTOPIC=com.myapp.hello/instrument1
     volumes: 
