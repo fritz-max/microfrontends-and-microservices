@@ -2,13 +2,18 @@ version: "3.3"
 services:
   
   composite-ui:
-    build: ./composite-ui
-    image: "composite-ui:compose-build-v1"
+    airvisor:
+    image: airvisor:v1
+    build:
+      context: ./airvisor
+      dockerfile: Dockerfile
+    volumes:
+    - ./airvisor:/app
+    - /app/node_modules
     ports:
-      - "3001:3001"
-    volumes: 
-      - "./composite-ui/src:/usr/src/composite-ui/src"
-      - "./wpConfig.json:/usr/src/composite-ui/config/wpConfig.json"
+    - 3001:3001
+    environment:
+    - CHOKIDAR_USEPOLLING=true
 
   crossbar-router:
     image: "crossbario/crossbar"
@@ -28,33 +33,15 @@ services:
       - "./instrument1-service:/app"
     command: python /app/mock_component/client_component_publish.py
     
-  instrument1-mfe:
-    build: ./instrument1-mfe
-    image: "instrument1-mfe:compose-build-v1"
+  instrument1_mfe:
+    image: instrument1_mfe:v1
+    build:
+      context: ./instrument1_mfe
+      dockerfile: Dockerfile
+    volumes:
+    - ./instrument1_mfe:/app
+    - /app/node_modules
     ports:
-      - "3002:3002"
-    volumes: 
-      - "./instrument1-mfe/src:/usr/src/mfe1/src"
-      - "./wpConfig.json:/usr/src/mfe1/config/wpConfig.json"
-      # - "./node_modules"
-
-
-  instrument2-service:
-    image: "crossbario/autobahn-python:cpy3"
-    environment: 
-      - CBURL=ws://crossbar-router:8080/ws
-      - CBREALM=realm1
-      - CBTOPIC=com.myapp.hello/instrument2
-    volumes: 
-      - "./instrument2-service:/app"
-    command: python /app/mock_component/client_component_publish.py
-    
-  instrument2-mfe:
-    build: ./instrument2-mfe
-    image: "instrument2-mfe:compose-build-v1"
-    ports:
-      - "3003:3003"
-    volumes: 
-      - "./instrument2-mfe/src:/usr/src/mfe2/src"
-      - "./wpConfig.json:/usr/src/mfe2/config/wpConfig.json"
-      # - "./node_modules"
+    - 3002:3002
+    environment:
+    - CHOKIDAR_USEPOLLING=true

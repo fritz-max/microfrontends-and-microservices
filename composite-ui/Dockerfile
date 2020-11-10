@@ -1,22 +1,17 @@
-# Docker Image which is used as foundation to create
-# a custom Docker Image with this Dockerfile
-FROM node:10
+FROM node:12
+
+WORKDIR /app
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
  
-# A directory within the virtualized Docker environment
-# Becomes more relevant when using Docker Compose later
-WORKDIR /usr/src/composite-ui
- 
-# Copies package.json to Docker environment
+# Copies package.json and installs
 COPY package.json ./
- 
-# Installs all node packages
+# COPY yarn.lock ./
 RUN yarn install
 
 # Copies everything over to Docker environment
-COPY . .
-  
-# Uses port which is used by the actual application
-EXPOSE 3001
+COPY . ./
 
 # Finally runs the application
 CMD [ "yarn", "start" ]

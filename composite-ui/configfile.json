@@ -1,0 +1,6 @@
+{
+  "port": 3001,
+  "remoteModules": {
+    "instrument1_mfe": "instrument1_mfe@http://localhost:3002/remoteEntry.js"
+  }
+}

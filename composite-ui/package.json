@@ -1,5 +1,5 @@
 {
-  "name": "@skytem-prototype/composite-ui",
+  "name": "airvisor",
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
@@ -14,8 +14,8 @@
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "start": "webpack-cli serve --host 0.0.0.0",
-    "build": "webpack --mode production",
+    "start": "webpack-cli serve -c ./preconfig/webpack.config.js --host 0.0.0.0",
+    "build": "webpack -c ./preconfig/webpack.config.js --mode production",
     "serve": "serve dist -p 3001",
     "clean": "rm -rf dist"
   },

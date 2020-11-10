@@ -1,13 +1,14 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const path = require("path");
-const deps = require("./package.json").dependencies;
-const moduleName = require("./package.json").name.split("/")[1];
-const extConfig = require("./config/wpConfig.json").webpackContainers[moduleName];
+const deps = require("../package.json").dependencies;
+// const moduleName = require("./package.json").name.split("/")[1];
+const moduleName = require("../package.json").name;
+const extConfig = require("../configfile.json");
 
 module.exports = {
   entry: {
-    main: "./src/index",
+    main: "./preconfig/index",
   },
   mode: "development",
   devServer: {

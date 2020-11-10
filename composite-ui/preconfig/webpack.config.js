@@ -1,18 +1,18 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const path = require("path");
-const deps = require("./package.json").dependencies;
-const moduleName = require("./package.json").name.split("/")[1];
-const extConfig = require("./config/wpConfig.json").webpackContainers[moduleName];
+const deps = require("../package.json").dependencies;
+const moduleName = require("../package.json").name;
+const config = require("../configfile.json");
 
 module.exports = {
   entry: {
-    main: "./src/index",
+    main: "./preconfig/index",
   },
   mode: "development",
   devServer: {
     contentBase: path.join(__dirname, "dist"),
-    port: extConfig.port,
+    port: config.port,
   },
   output: {
     // public path can be what it normally is, not a absolute, hardcoded url
@@ -33,8 +33,7 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       name: moduleName,
-      // PROBLEM COULD BE that before, the names of "mfe1, mfe2" were not strings? look that up
-      remotes: extConfig.remoteContainers,
+      remotes: config.remoteModules,
       shared: {
         "react": { singleton: true, requiredVersion: deps.react },
         "react-dom": { singleton: true, requiredVersion: deps["react-dom"] }

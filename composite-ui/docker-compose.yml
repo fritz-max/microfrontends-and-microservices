@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  airvisor:
+    image: airvisor:v1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+    - .:/app
+    - /app/node_modules
+    ports:
+    - 3001:3001
+    environment:
+    - CHOKIDAR_USEPOLLING=true

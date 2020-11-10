@@ -3,7 +3,8 @@ import {Line, Chart} from 'react-chartjs-2';
 import 'chartjs-plugin-zoom';
 import 'chartjs-plugin-streaming';
 
-import autobahn from 'autobahn-browser';
+const config = require("../configfile.json");
+import Connection from './wamp';
 
 
 const initialState = {
@@ -13,7 +14,7 @@ const initialState = {
       fill: false,
       lineTension: 0.1,
       backgroundColor: 'rgba(75,192,192,0.4)',
-      borderColor: 'rgba(75,192,192,1)',
+      borderColor: 'rgba(75,192,1^^92,1)',
       pointRadius: 1,
       pointHitRadius: 10,
       data: []
@@ -54,40 +55,24 @@ class Graph extends React.Component {
             graphData: initialState,
             graphOptions: initialOptions
         }
+        this.wampConnection = new Connection()
+
+        // Function Bindings
         this.handleAxisTypeToggle = this.handleAxisTypeToggle.bind(this);
         this.handlePauseToggle = this.handlePauseToggle.bind(this);
     }
 
-
-
     componentDidMount(){
-        this.autobahnConnection = new autobahn.Connection({
-            url: 'ws://localhost:8080/ws',
-            realm: 'realm1'
+        this.wampConnection.subscribe(config.instrument, (args) => {
+            var newDataSet = this.state.graphData.datasets[0];
+            newDataSet.data = [...newDataSet.data,
+                {
+                    x: Date.now(),
+                    y: args[1]
+                }
+            ];
+            this.setState({graphData: {datasets: [newDataSet]}});
         })
-
-        this.autobahnConnection.onopen = (session, details) => {
-            session.subscribe("com.myapp.hello/instrument1", (args) => {
-
-                var newDataSet = this.state.graphData.datasets[0];
-                newDataSet.data = [...newDataSet.data,
-                    {
-                        x: Date.now(),
-                        y: args[1]
-                    }
-                ];
-
-                this.setState({graphData: {datasets: [newDataSet]}});
-                
-            });
-        }
-
-        this.autobahnConnection.open();
-
-    }
-
-    componentWillUnmount() {
-        this.autobahnConnection.close();
     }
 
     render() {

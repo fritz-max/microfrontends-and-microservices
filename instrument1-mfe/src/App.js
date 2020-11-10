@@ -1,5 +1,5 @@
 import React from "react";
-import Graph from './instrumentGraph'
+import Graph from './instrumentGraph';
 
 const App = () => (
   <div style={
