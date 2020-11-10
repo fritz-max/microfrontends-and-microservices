@@ -30,7 +30,7 @@ services:
       - CBTOPIC=com.myapp.hello/instrument1
     volumes: 
       - "./instrument1_service:/app"
-    command: python /app/mock_component/client_component_publish.py
+    command: python -u /app/mock_component/client_component_publish.py
     
   instrument1_mfe:
     image: instrument1_mfe:v1

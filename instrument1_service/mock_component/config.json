@@ -1,0 +1,9 @@
+{
+  "connection": {
+    "router": {
+      "url": "ws://crossbar_router:8080/ws",
+      "realm": "realm1"
+    },
+    "topic": "com.myapp.hello/instrument1"
+  }
+}
