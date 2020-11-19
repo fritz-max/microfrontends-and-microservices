@@ -1,5 +1,6 @@
 {
   "webpackRemoteModules": {
-    "prototype_mfe1": "prototype_mfe1@http://localhost:3001/remoteEntry.js"
+    "prototype_mfe1": "prototype_mfe1@http://localhost:3001/remoteEntry.js",
+    "instrument1_mfe": "instrument1_mfe@http://localhost:3002/remoteEntry.js"
   }
 }

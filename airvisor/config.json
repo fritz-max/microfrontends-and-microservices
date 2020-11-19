@@ -3,9 +3,9 @@
   "port": 3001,
   "microFrontends": [
       {
-          "name": "prototype_mfe1",
+          "name": "instrument1_mfe",
           "address": "localhost",
-          "port": 3001
+          "port": 3002
       }
   ]
 }

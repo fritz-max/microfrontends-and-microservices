@@ -1,7 +1,7 @@
 version: '3.7'
 services:
-  prototype_cui:
-    image: prototype_cui
+  airvisor:
+    image: airvisor
     build:
       context: .
       dockerfile: Dockerfile

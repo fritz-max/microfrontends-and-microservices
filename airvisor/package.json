@@ -14,7 +14,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "start": "node ./preconfig/configurate.js && webpack-cli serve -c ./preconfig/webpack.config.js --host 0.0.0.0",
+    "start": "node ./preconfig/configurator.js && webpack-cli serve -c ./preconfig/webpack.config.js --host 0.0.0.0",
     "build": "webpack -c ./preconfig/webpack.config.js --mode production",
     "serve": "serve dist -p 3001",
     "clean": "rm -rf dist"
