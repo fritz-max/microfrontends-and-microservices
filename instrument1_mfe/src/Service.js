@@ -1,7 +1,7 @@
 import React from "react";
 import Graph from './instrumentGraph';
 
-const App = () => (
+const Service = () => (
   <div style={
     {backgroundColor: "WhiteSmoke", textAlign: "center"}
   }>
@@ -10,4 +10,4 @@ const App = () => (
   </div>
 );
 
-export default App;
+export default Service;

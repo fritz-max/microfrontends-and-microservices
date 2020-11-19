@@ -14,13 +14,14 @@
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "start": "webpack-cli serve -c ./preconfig/webpack.config.js --host 0.0.0.0",
+    "start": "node ./preconfig/configurate.js && webpack-cli serve -c ./preconfig/webpack.config.js --host 0.0.0.0",
     "build": "webpack -c ./preconfig/webpack.config.js --mode production",
     "serve": "serve dist -p 3002",
     "clean": "rm -rf dist"
   },
   "dependencies": {
     "autobahn-browser": "^20.9.2",
+    "js-yaml": "^3.14.0",
     "chart.js": "^2.9.3",
     "chartjs-plugin-streaming": "^1.8.0",
     "chartjs-plugin-zoom": "^0.7.7",

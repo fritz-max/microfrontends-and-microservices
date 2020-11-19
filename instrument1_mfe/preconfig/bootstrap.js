@@ -1,5 +1,5 @@
-import App from "../src/App";
+import Service from "../src/Service";
 import React from "react";
 import ReactDOM from "react-dom";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<Service />, document.getElementById("root"));

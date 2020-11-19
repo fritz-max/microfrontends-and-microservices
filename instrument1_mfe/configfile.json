@@ -1,13 +1,11 @@
 {
+  "name": "instrument1_mfe",
   "port": 3002,
-  "exposedModules": {
-      "./App": "./src/App"
-  },
-  "connection": {
-    "router": {
-      "url": "ws://localhost:8080/ws",
-      "realm": "realm1"
-    },
-    "topic": "com.myapp.hello/instrument1"
-  }
+  "router": "localhost",
+  "subscribeTopics": [
+      "subtopic1", "subtopic2"
+  ],
+  "publishTopics": [
+      "pubtopic1"
+  ]
 }
