@@ -1,14 +1,14 @@
 version: '3.7'
 services:
   instrument1_mfe:
-    image: instrument1_mfe:v1
+    image: instrument1_mfe
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
-    - .:/app
-    - /app/node_modules
+      - '.:/app'
+      - /app/node_modules
     ports:
-    - 3002:3002
+      - '3002:3002'
     environment:
-    - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_USEPOLLING=true

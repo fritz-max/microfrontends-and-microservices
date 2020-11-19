@@ -1,0 +1,9 @@
+{
+  "name": "instrument1_mfe",
+  "port": 3002,
+  "router": "localhost",
+  "subscribeTopics": [
+      "instrument1"
+  ],
+  "publishTopics": []
+}

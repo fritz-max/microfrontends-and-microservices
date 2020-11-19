@@ -1,14 +1,15 @@
 import React from "react";
 import autobahn from 'autobahn-browser';
 
-const config = require("../configfile.json").connection;
+import ConnectionSettings from "./ConnectionSettings";
 
-class Connection extends React.Component {
+class Connection {
     constructor() {
-        super()
+        // super()
+        this.connectionSettings = new ConnectionSettings()
         this.connection = new autobahn.Connection({
-            url: config.router.url,
-            realm: config.router.realm
+            url: this.connectionSettings.url,
+            realm: this.connectionSettings.realm
         })
     }
 
@@ -16,11 +17,18 @@ class Connection extends React.Component {
         this.connection.onopen = (session, details) => {
             session.subscribe(topic, subscribeCallback)
         }
+    }
+
+    openConnection() {
         this.connection.open();
     }
 
+    closeConnection() {
+        this.connection.close();
+    }
+
     componentWillUnmount() {
-        this.autobahnConnection.close();
+        this.closeConnection();
     }
 }
 

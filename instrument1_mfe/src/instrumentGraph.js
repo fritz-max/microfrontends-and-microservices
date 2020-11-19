@@ -3,8 +3,8 @@ import {Line, Chart} from 'react-chartjs-2';
 import 'chartjs-plugin-zoom';
 import 'chartjs-plugin-streaming';
 
-const config = require("../configfile.json").connection;
 import Connection from './wamp';
+import ConnectionSettings from "./ConnectionSettings";
 
 
 const initialState = {
@@ -56,6 +56,7 @@ class Graph extends React.Component {
             graphOptions: initialOptions
         }
         this.wampConnection = new Connection()
+        this.connectionSettings = new ConnectionSettings()
 
         // Function Bindings
         this.handleAxisTypeToggle = this.handleAxisTypeToggle.bind(this);
@@ -63,7 +64,7 @@ class Graph extends React.Component {
     }
 
     componentDidMount(){
-        this.wampConnection.subscribe(config.topic, (args) => {
+        this.wampConnection.subscribe(this.connectionSettings.subscribeTopics[0], (args) => {
             var newDataSet = this.state.graphData.datasets[0];
             newDataSet.data = [...newDataSet.data,
                 {
@@ -73,6 +74,7 @@ class Graph extends React.Component {
             ];
             this.setState({graphData: {datasets: [newDataSet]}});
         })
+        this.wampConnection.openConnection();
     }
 
     render() {
