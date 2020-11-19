@@ -6,7 +6,7 @@
             "type": "router",
             "realms": [
                 {
-                    "name": "realm1",
+                    "name": "realm",
                     "roles": [
                         {
                             "name": "anonymous",

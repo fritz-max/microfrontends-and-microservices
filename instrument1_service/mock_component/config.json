@@ -2,8 +2,8 @@
   "connection": {
     "router": {
       "url": "ws://crossbar_router:8080/ws",
-      "realm": "realm1"
+      "realm": "realm"
     },
-    "topic": "com.myapp.hello/instrument1"
+    "topic": "com.skytem/instrument1"
   }
 }

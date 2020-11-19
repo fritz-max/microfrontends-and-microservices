@@ -2,7 +2,7 @@ version: "3.3"
 services:
   
   airvisor:
-    image: airvisor:v1
+    image: airvisor
     build:
       context: ./airvisor
       dockerfile: Dockerfile
@@ -33,7 +33,7 @@ services:
     command: python -u /app/mock_component/client_component_publish.py
     
   instrument1_mfe:
-    image: instrument1_mfe:v1
+    image: instrument1_mfe
     build:
       context: ./instrument1_mfe
       dockerfile: Dockerfile
