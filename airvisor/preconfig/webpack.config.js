@@ -2,8 +2,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const path = require("path");
 const deps = require("../package.json").dependencies;
-const moduleName = require("../package.json").name;
-const config = require("../configfile.json");
+const name = require("../config.json").name;
+const port = require("../config.json").port;
+const remoteModules = require("./modules.json").webpackRemoteModules;
 
 module.exports = {
   entry: {
@@ -12,7 +13,7 @@ module.exports = {
   mode: "development",
   devServer: {
     contentBase: path.join(__dirname, "dist"),
-    port: config.port,
+    port: port,
   },
   output: {
     // public path can be what it normally is, not a absolute, hardcoded url
@@ -32,8 +33,8 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: moduleName,
-      remotes: config.remoteModules,
+      name: name,
+      remotes: remoteModules,
       shared: {
         "react": { singleton: true, requiredVersion: deps.react },
         "react-dom": { singleton: true, requiredVersion: deps["react-dom"] }
@@ -41,7 +42,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      excludeChunks: [moduleName],
+      excludeChunks: [name],
     }),
   ],
 };

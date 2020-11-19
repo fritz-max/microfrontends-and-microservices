@@ -1,0 +1,11 @@
+{
+  "name": "airvisor",
+  "port": 3001,
+  "microFrontends": [
+      {
+          "name": "prototype_mfe1",
+          "address": "localhost",
+          "port": 3001
+      }
+  ]
+}

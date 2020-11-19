@@ -14,12 +14,13 @@
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "start": "webpack-cli serve -c ./preconfig/webpack.config.js --host 0.0.0.0",
+    "start": "node ./preconfig/configurate.js && webpack-cli serve -c ./preconfig/webpack.config.js --host 0.0.0.0",
     "build": "webpack -c ./preconfig/webpack.config.js --mode production",
     "serve": "serve dist -p 3001",
     "clean": "rm -rf dist"
   },
   "dependencies": {
+    "js-yaml": "^3.14.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0"
   }
