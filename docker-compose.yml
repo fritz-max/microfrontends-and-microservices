@@ -27,13 +27,9 @@ services:
     build:
       context: ./instrument1_service
       dockerfile: Dockerfile
-    environment: 
-      - CBURL=ws://crossbar_router:8080/ws
-      - CBREALM=realm1
-      - CBTOPIC=com.myapp.hello/instrument1
     volumes: 
       - "./instrument1_service:/app"
-    command: python -u /app/mock_component/client_component_publish.py
+    command: python -u /app/service.py
     
   instrument1_mfe:
     image: instrument1_mfe

@@ -3,10 +3,10 @@
   "port": 3002,
   "router": "localhost",
   "subscribeTopics": [
-    "instrument1"
+    "IMU"
   ],
   "publishTopics": [], 
   "rpcTopics": [
-    "instrument1/pause"
+    "IMU/control_measurement"
   ]
 }

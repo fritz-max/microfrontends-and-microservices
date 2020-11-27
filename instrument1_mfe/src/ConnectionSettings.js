@@ -9,15 +9,15 @@ class ConnectionSettings {
         this.rpcTopics = []
 
         config.subscribeTopics.forEach(topic => {
-            this.subscribeTopics.push("com.skytem/"+topic)
+            this.subscribeTopics.push("com.airvisor/"+topic)
         })
 
         config.publishTopics.forEach(topic => {
-            this.publishTopics.push("com.skytem/"+topic)
+            this.publishTopics.push("com.airvisor/"+topic)
         })
 
         config.rpcTopics.forEach(topic => {
-            this.rpcTopics.push("com.skytem/"+topic)
+            this.rpcTopics.push("com.airvisor/"+topic)
         })
     }
 }

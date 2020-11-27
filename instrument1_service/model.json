@@ -1,0 +1,11 @@
+{
+    "subscribe-topics": [],
+    "publish-topics": [
+        "IMU",
+        "heartbeat"
+    ],
+    "caller-topics": [],
+    "callee-topics": [
+        "IMU/control_measurement"
+    ]
+}

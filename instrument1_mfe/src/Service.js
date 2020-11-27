@@ -1,5 +1,5 @@
 import React from "react";
-import ChartjsGraph from './instrumentGraph';
+import ChartjsGraph from './chartjsGraph';
 import PlotlyGraph from "./plotlyGraph"
 
 const Service = () => (
@@ -7,7 +7,9 @@ const Service = () => (
     {backgroundColor: "WhiteSmoke", textAlign: "center"}
   }>
     <h1>Microfrontend</h1>
-    <ChartjsGraph />
+    <div style={{width: "750px"}}>
+      <ChartjsGraph />
+    </div>
     <PlotlyGraph />
   </div>
 );

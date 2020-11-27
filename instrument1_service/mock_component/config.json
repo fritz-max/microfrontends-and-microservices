@@ -1,9 +1,0 @@
-{
-  "connection": {
-    "router": {
-      "url": "ws://crossbar_router:8080/ws",
-      "realm": "realm"
-    },
-    "topic": "com.skytem/instrument1"
-  }
-}

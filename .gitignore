@@ -1,6 +1,8 @@
 node_modules/
 .vscode/
 dist/
+.ipynb_checkpoints/
+__pycache__
 
 # h5 data from Skytem
 *.h5
