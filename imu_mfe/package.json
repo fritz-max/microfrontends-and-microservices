@@ -1,5 +1,5 @@
 {
-  "name": "instrument1_mfe",
+  "name": "imu_mfe",
   "version": "0.0.1",
   "private": true,
   "devDependencies": {

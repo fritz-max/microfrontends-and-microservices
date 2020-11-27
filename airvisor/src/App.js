@@ -1,7 +1,7 @@
 import React from "react";
 
 // Example of loading a remote component
-const RemoteService1 = React.lazy(() => import("instrument1_mfe/Service"));
+const RemoteService1 = React.lazy(() => import("imu_mfe/Service"));
 // const RemoteService2 = React.lazy(() => import("mfe2/Service"));
 
 

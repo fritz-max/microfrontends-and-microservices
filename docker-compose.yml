@@ -22,22 +22,22 @@ services:
       - "./crossbar_router:/node"
     user: "0"
 
-  instrument1_service:
-    image: instrument1_service
+  imu_service:
+    image: imu_service
     build:
-      context: ./instrument1_service
+      context: ./imu_service
       dockerfile: Dockerfile
     volumes: 
-      - "./instrument1_service:/app"
+      - "./imu_service:/app"
     command: python -u /app/service.py
     
-  instrument1_mfe:
-    image: instrument1_mfe
+  imu_mfe:
+    image: imu_mfe
     build:
-      context: ./instrument1_mfe
+      context: ./imu_mfe
       dockerfile: Dockerfile
     volumes:
-    - ./instrument1_mfe:/app
+    - ./imu_mfe:/app
     - /app/node_modules
     ports:
     - 3002:3002

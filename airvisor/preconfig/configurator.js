@@ -41,6 +41,7 @@ fs.writeFile('./package.json', JSON.stringify(package, null, 2), (err) => {
 
 // manipulate modules.json
 var modules = require("./modules.json");
+modules.webpackRemoteModules = {}
 
 config.microFrontends.forEach(mfe => {
     modules.webpackRemoteModules[mfe.name] = mfe.name+"@http://"+mfe.address+":"+mfe.port+"/remoteEntry.js"

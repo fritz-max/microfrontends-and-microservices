@@ -1,5 +1,5 @@
 {
-  "name": "instrument1_mfe",
+  "name": "imu_mfe",
   "port": 3002,
   "router": "localhost",
   "subscribeTopics": [

@@ -1,7 +1,7 @@
 version: '3.7'
 services:
-  instrument1_mfe:
-    image: instrument1_mfe
+  imu_mfe:
+    image: imu_mfe
     build:
       context: .
       dockerfile: Dockerfile
