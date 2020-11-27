@@ -3,7 +3,7 @@ import autobahn from 'autobahn-browser';
 
 import ConnectionSettings from "./ConnectionSettings";
 
-class Connection {
+class Wamp {
     constructor() {
         // super()
         this.connectionSettings = new ConnectionSettings()
@@ -32,4 +32,4 @@ class Connection {
     }
 }
 
-export default Connection
+export default Wamp
