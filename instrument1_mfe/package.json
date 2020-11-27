@@ -15,20 +15,21 @@
   },
   "scripts": {
     "start": "node ./preconfig/configurator.js && webpack-cli serve -c ./preconfig/webpack.config.js --host 0.0.0.0",
-    "build": "webpack -c ./preconfig/webpack.config.js --mode production",
+    "build": "node ./preconfig/configurator.js && webpack -c ./preconfig/webpack.config.js --mode production",
     "serve": "serve dist -p 3002",
     "clean": "rm -rf dist"
   },
   "dependencies": {
     "autobahn-browser": "^20.9.2",
-    "js-yaml": "^3.14.0",
     "chart.js": "^2.9.3",
     "chartjs-plugin-streaming": "^1.8.0",
     "chartjs-plugin-zoom": "^0.7.7",
+    "js-yaml": "^3.14.0",
+    "plotly.js": "^1.57.1",
     "react": "^16.13.0",
-    "react-dom": "^16.13.0",
     "react-chartjs-2": "^2.10.0",
-    "sockjs": "^0.3.21",
-    "webpack-cli": "^4.2.0"
+    "react-dom": "^16.13.0",
+    "react-plotly.js": "^2.5.0",
+    "sockjs": "^0.3.21"
   }
 }

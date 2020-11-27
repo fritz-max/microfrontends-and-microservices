@@ -10,6 +10,8 @@ COPY package.json ./
 # COPY yarn.lock ./
 RUN yarn install
 
+RUN yarn add react-plotly.js plotly.js
+
 # Copies everything over to Docker environment
 COPY . ./
 
