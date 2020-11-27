@@ -23,7 +23,10 @@ services:
     user: "0"
 
   instrument1_service:
-    image: "crossbario/autobahn-python:cpy3"
+    image: instrument1_service
+    build:
+      context: ./instrument1_service
+      dockerfile: Dockerfile
     environment: 
       - CBURL=ws://crossbar_router:8080/ws
       - CBREALM=realm1

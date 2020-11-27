@@ -2,6 +2,9 @@ node_modules/
 .vscode/
 dist/
 
+# h5 data from Skytem
+*.h5
+
 key.priv
 key.pub
 
