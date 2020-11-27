@@ -1,7 +1,7 @@
 import React from "react";
 import autobahn from 'autobahn-browser';
 
-import ConnectionSettings from "./ConnectionSettings";
+import ConnectionSettings from "./connectionSettings";
 
 class Wamp {
     constructor() {

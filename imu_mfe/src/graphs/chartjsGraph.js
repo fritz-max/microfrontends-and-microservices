@@ -3,8 +3,8 @@ import {Line, Chart} from 'react-chartjs-2';
 import 'chartjs-plugin-zoom';
 import 'chartjs-plugin-streaming';
 
-import Wamp from './wamp';
-import ConnectionSettings from "./ConnectionSettings";
+import Wamp from '../connection/Wamp';
+import ConnectionSettings from "../connection/connectionSettings";
 
 
 const initialState = {
@@ -103,7 +103,7 @@ const initialOptions = {
 
 
 class ChartjsGraph extends React.Component {
-    constructor () {
+    constructor (props) {
         super()
         this.state = {
             graphData: initialState,
@@ -111,10 +111,6 @@ class ChartjsGraph extends React.Component {
         }
         this.wamp = new Wamp()
         this.connectionSettings = new ConnectionSettings()
-
-        // chart js ref
-        // this.myChart = new Chart(ctx, config);
-        // this.chartReference = React.createRef();
 
         // Function Bindings
         this.handleAxisTypeToggle = this.handleAxisTypeToggle.bind(this);
@@ -151,7 +147,6 @@ class ChartjsGraph extends React.Component {
             <Line 
                 data={this.state.graphData} 
                 options={this.state.graphOptions}
-                ref={this.chartReference}
             />
             <button onClick={this.handlePauseToggle}>Pause</button>
             <button onClick={this.handleAxisTypeToggle}>Axis Type</button>
@@ -171,6 +166,7 @@ class ChartjsGraph extends React.Component {
         newStateOptions.scales.yAxes[0].type = newStateOptions.scales.yAxes[0].type == "linear" ? "logarithmic" : "linear"
         this.setState({graphOptions: newStateOptions})
     }
+    
     handleRemotePause () {
         this.wamp.connection.session.call(this.connectionSettings.rpcTopics[0]).then(returnValue => {
             this.wamp.connection.session.log("RPC Called. Returned: ", returnValue);

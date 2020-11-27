@@ -23,7 +23,7 @@ def joined(session, details):
         return instrument.heartbeat
 
     try:
-        yield session.register(callee_control_measurement, service.callee_topics["control_measurement"])
+        yield session.register(callee_control_measurement, service.callee_topics["IMU/control_measurement"])
         print("procedure registered")
     except Exception as e:
         print("could not register procedure: {0}".format(e))
