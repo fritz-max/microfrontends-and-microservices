@@ -5,12 +5,6 @@ import PlotlyGraph from "./graphs/plotlyGraph";
 import Wamp from './connection/Wamp';
 import ConnectionSettings from "./connection/connectionSettings";
 
-var traceProto = {
-  x: [0],
-  y: [0],
-  type: 'line'
-};
-
 class Service extends React.Component {
   constructor() {
     super()
@@ -18,46 +12,69 @@ class Service extends React.Component {
     this.connectionSettings = new ConnectionSettings()
     
     this.state = {
-      data: [
+      chartjsData: {
+        datasets: [
+          {
+              label: "Data0",
+              fill: false,
+              lineTension: 0.1,
+              backgroundColor: 'rgba(75,192,192,0.4)',
+              borderColor: 'rgba(108,108,248,1)',
+              pointRadius: 1,
+              pointHitRadius: 10,
+              data: []
+          },
+          {
+              label: "Data1",
+              fill: false,
+              lineTension: 0.1,
+              backgroundColor: 'rgba(75,192,192,0.4)',
+              borderColor: 'rgba(248,108,108,1)',
+              pointRadius: 1,
+              pointHitRadius: 10,
+              data: []
+          },
+          {
+              label: "Data2",
+              fill: false,
+              lineTension: 0.1,
+              backgroundColor: 'rgba(75,192,192,0.4)',
+              borderColor: 'rgba(108,248,108,1)',
+              pointRadius: 1,
+              pointHitRadius: 10,
+              data: []
+          }
+        ]
+      },
+      plotlyData: [
           {
               x: [],
               y: [],
-              type: 'scatter',
+              type: 'line',
               name: 'data1'
           },
           {
               x: [],
               y: [],
-              type: 'scatter',
+              type: 'line',
               name: 'data2'
           },
           {
               x: [],
               y: [],
-              type: 'scatter',
+              type: 'line',
               name: 'data3'
           }
-      ], 
-      layout: {
-          showlegend: true,
-          datarevision: 0,
-          xaxis: {
-            autorange: false,
-            type: "date"
-          }
-      }, 
-      config: {
-          scrollZoom: true
-      }
+      ]
   };
     
-    this.updatePlotlyGraph = this.updatePlotlyGraph.bind(this)
+    this.updatePlotData = this.updatePlotData.bind(this)
     this.handleIMUControl = this.handleIMUControl.bind(this)
   }
 
   componentDidMount() {
     this.wamp.subscribe(this.connectionSettings.subscribeTopics[0], (args) => {
-      this.updatePlotlyGraph(args)
+      this.updatePlotData(args)
     })
     this.wamp.openConnection();
   }
@@ -66,27 +83,29 @@ class Service extends React.Component {
     this.wamp.closeConnection();
   }
 
-  updatePlotlyGraph(args) {
-    var newData = []
+  updatePlotData(args) {
+    var newPlotlyData = []
+    var newChartjsDatasets = []
     var timestamp = new Date()
     
-    this.state.data.forEach((dataset, idx) => {
+    this.state.plotlyData.forEach((dataset, idx) => {
       dataset.x.push(timestamp)
       dataset.y.push(args[1][idx])
-      newData.push(dataset)
+      newPlotlyData.push(dataset)
     })
     
-    this.setState({data: newData});
-    
-    var layout = this.state.layout
-    
-    var olderTime = newData[0].x[(newData[0].x.length <= 50) ? 0 : newData[0].x.length-100]
-    var futureTime = newData[0].x[newData[0].x.length-1]
+    this.state.chartjsData.datasets.forEach((dataset, idx) => {
+      dataset.data.push({
+        t: timestamp,
+        y: args[1][idx]
+      })
+      newChartjsDatasets.push(dataset)
+    })
 
-    layout.xaxis.range = [ olderTime, futureTime ]
-
-    layout.datarevision = layout.datarevision+1 
-    this.setState({layout})
+    this.setState({
+      chartjsData: {datasets: newChartjsDatasets},
+      plotlyData: newPlotlyData
+    });
   }
 
   handleIMUControl() {
@@ -101,13 +120,13 @@ class Service extends React.Component {
         {backgroundColor: "WhiteSmoke", textAlign: "center"}
       }>
         <h1>Microfrontend</h1>
-        {/* <div style={{width: "750px"}}>
-          <ChartjsGraph />
-        </div> */}
-        <PlotlyGraph  
-          data={this.state.data}
-          layout={this.state.layout}
-          config={this.state.config}
+        <div style={{width: "750px"}}>
+          <ChartjsGraph 
+            data={this.state.chartjsData}
+          />
+        </div>
+          <PlotlyGraph  
+            data={this.state.plotlyData}
           />
         <button onClick={this.handleIMUControl}>[RPC] IMU Control</button>
       </div>
