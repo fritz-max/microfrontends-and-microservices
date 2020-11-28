@@ -28,10 +28,10 @@ def joined(session, details):
     except Exception as e:
         print("could not register procedure: {0}".format(e))
 
-    publish_interval = 0.2
+    publish_interval = 0.1
     while True: 
         if instrument.heartbeat:
-            measurement = instrument.get_measurement()
+            measurement = instrument.get_measurement(publish_interval=publish_interval)
             session.publish(service.publish_topics["IMU"], *measurement)
             session.publish(service.publish_topics["heartbeat"], instrument.ID)
         yield sleep(publish_interval)
