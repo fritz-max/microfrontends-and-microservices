@@ -25,6 +25,8 @@ git clone --depth 1 https://github.com/OsvaldFrisk/ms-prototype.git [NAME OF YOU
 git clone --depth 1 https://github.com/fritz-max/mfe-template.git [NAME OF YOUR NEW SERVICE]
 ```
 
+You should also remove the .git directories in the template folders, to prevent git of treating the new services as submodules. 
+
 ### 2. Configurate services
 Access the directories and change the `config.json` and `model.json` of mfe and service respectively. Note that for both services to communicate, the `publishTopics` and `subscribeTopics`, as well as `caller` and `callee` topices for the RPCs have to match. The imu_mfe and imu_service provide examples for this.  
 
