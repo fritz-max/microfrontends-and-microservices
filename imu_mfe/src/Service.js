@@ -1,5 +1,5 @@
 import React from "react";
-import PlotlyGraph from "./plotlyGraph";
+import PlotlyGraph from "./PlotlyGraph";
 import { Wamp, ConnectionSettings } from './Connection';
 
 
