@@ -1,5 +1,6 @@
 {
   "webpackRemoteModules": {
-    "imu_mfe": "imu_mfe@http://localhost:3002/remoteEntry.js"
+    "imu_mfe": "imu_mfe@http://localhost:3002/remoteEntry.js",
+    "acc_mfe": "acc_mfe@http://localhost:3003/remoteEntry.js"
   }
 }

@@ -2,7 +2,7 @@ import React from "react";
 
 // Example of loading a remote component
 const RemoteService1 = React.lazy(() => import("imu_mfe/Service"));
-// const RemoteService2 = React.lazy(() => import("mfe2/Service"));
+const RemoteService2 = React.lazy(() => import("acc_mfe/Service"));
 
 
 const App = () => (
@@ -15,12 +15,12 @@ const App = () => (
         <RemoteService1  />
       </React.Suspense>
     </div>
-    {/* <h2>MFE-2</h2>
+    <h2>MFE-2</h2>
     <div style={{width: "1000px"}}>
       <React.Suspense fallback="Loading App">
         <RemoteService2  />
       </React.Suspense>
-    </div> */}
+    </div>
   </div>
 );
 

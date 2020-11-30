@@ -6,6 +6,11 @@
           "name": "imu_mfe",
           "address": "localhost",
           "port": 3002
-      }
+      },
+      {
+        "name": "acc_mfe",
+        "address": "localhost",
+        "port": 3003
+    }
   ]
 }

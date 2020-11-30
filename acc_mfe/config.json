@@ -1,0 +1,15 @@
+{
+    "name": "acc_mfe",
+    "port": 3003,
+    "router": "localhost",
+    "topics": {
+        "subscribeTopics": [
+            "ACC"
+        ],
+        "publishTopics": [], 
+        "callerTopics": [
+            "ACC/control_measurement"
+        ],
+        "calleeTopics": []
+    }
+}
