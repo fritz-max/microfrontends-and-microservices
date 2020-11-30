@@ -7,6 +7,29 @@ class PlotlyGraph extends React.Component {
         super();
 
         this.state = {
+            datasets: [
+                {
+                    x: [],
+                    y: [],
+                    type: 'scattergl',
+                    name: 'data1',
+                    mode: 'lines+markers'
+                },
+                {
+                    x: [],
+                    y: [],
+                    type: 'scattergl',
+                    name: 'data2',
+                    mode: 'lines+markers'
+                },
+                {
+                    x: [],
+                    y: [],
+                    type: 'scattergl',
+                    name: 'data3',
+                    mode: 'lines+markers'
+                }
+            ],
             layout: {
                 showlegend: true,
                 autosize: false,
@@ -45,6 +68,7 @@ class PlotlyGraph extends React.Component {
         }
 
         this.onUpdate = this.onUpdate.bind(this)
+        this.updatePlotData = this.updatePlotData.bind(this)
     }
 
     onUpdate (figure) {
@@ -59,10 +83,25 @@ class PlotlyGraph extends React.Component {
         this.setState(figure)
     }
 
+    updatePlotData (newData) {
+        var newDatasets = []
+        var timestamp = new Date()
+        
+        this.state.datasets.forEach((dataset, idx) => {
+          dataset.x.push(timestamp)
+          dataset.y.push(newData[1][idx])
+          newDatasets.push(dataset)
+        })
+        
+        this.setState({
+          datasets: newDatasets
+        });
+    }
+
     render() {
         return (
             <Plot
-                data={this.props.data}
+                data={this.state.datasets}
                 layout={this.state.layout}
                 config={this.state.config}
                 onInitialized={(figure) => this.setState(figure)}
