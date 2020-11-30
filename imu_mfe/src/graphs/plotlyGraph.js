@@ -1,5 +1,6 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
+var Plotly = require('plotly.js/lib/core');
 
 class PlotlyGraph extends React.Component {
     constructor() {
@@ -8,14 +9,38 @@ class PlotlyGraph extends React.Component {
         this.state = {
             layout: {
                 showlegend: true,
+                autosize: false,
+                width: 1000,
+                height: 500,
+                margin: {
+                    l: 50,
+                    r: 50,
+                    b: 75,
+                    t: 50,
+                    pad: 4
+                },
                 datarevision: 0,
                 xaxis: {
-                  autorange: false,
-                  type: "date"
+                    autorange: false,
+                    type: "date",
+                    title: "Time"
+                },
+                yaxis: {
+                    type: "linear",
+                    fixedrange: true
                 }
             }, 
             config: {
-                scrollZoom: true
+                scrollZoom: true,
+                modeBarButtonsToAdd: [
+                    {
+                        name: "Y-Axis Type Toggle",
+                        icon: Plotly.Icons.pencil,
+                        click: () => { this.setState(oldState => {
+                            return {layout: {yaxis: {type: (oldState.layout.yaxis.type === "linear") ? "log" : "linear"}}}
+                        })}
+                    }
+                ]
             }
         }
 
