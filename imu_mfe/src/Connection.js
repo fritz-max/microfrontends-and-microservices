@@ -44,6 +44,17 @@ export class Wamp {
         }
     }
 
+    callRPC(topic) {
+        var returnVal = "";
+        this.connection.session.call(topic)
+            .then(rpcReturnVal => {
+                returnVal = rpcReturnVal
+                this.connection.session.log("Called Function "+topic)
+                this.connection.session.log("Return Value: "+rpcReturnVal)
+            })
+        return returnVal
+    }
+
     openConnection() {
         this.connection.open();
     }
