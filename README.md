@@ -34,7 +34,7 @@ Besides the new services, the composite UI (`airvisor`) also needs to include th
 In the `docker-compose.yml` file in project root, the two new services have to be added. For now, the easiest way to do this is to copy the configurations of `imu_mfe` and `imu_service` and change the names and links in them. 
 
 ### 4. Add your source code
-Now, the service and mfe can be programmed to your liking. For the MFE, the source code lives in the `/src´ directory, with `Service.js` being the entrypoint to the application and the component that is exposed to the composite UI. For the service it is the `service.py` file. 
+Now, the service and mfe can be programmed to your liking. For the MFE, the source code lives in the `/src´ directory, with `Service.js´ being the entrypoint to the application and the component that is exposed to the composite UI. For the service it is the `service.py` file. 
 
 ## Checkout the alternative branch 
 The setup with 2 MFEs and 2 Services, as well as the second chart library can be seen in the branch "extended". 
