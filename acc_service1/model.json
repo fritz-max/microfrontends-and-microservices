@@ -1,0 +1,11 @@
+{
+    "subscribe-topics": [],
+    "publish-topics": [
+        "ACC",
+        "heartbeat"
+    ],
+    "caller-topics": [],
+    "callee-topics": [
+        "ACC/control_measurement"
+    ]
+}
