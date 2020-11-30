@@ -1,6 +1,5 @@
 import React from "react";
-import ChartjsGraph from './graphs/chartjsGraph';
-import PlotlyGraph from "./graphs/plotlyGraph";
+import PlotlyGraph from "./plotlyGraph";
 import { Wamp, ConnectionSettings } from './Connection';
 
 
@@ -39,11 +38,6 @@ class Service extends React.Component {
         {backgroundColor: "WhiteSmoke", textAlign: "center"}
       }>
         <h1>Microfrontend</h1>
-        {/* <div style={{width: "750px", justifyContent: "center"}}>
-          <ChartjsGraph 
-            ref={this.chartjsRef}
-          />
-        </div> */}
         <PlotlyGraph 
           ref={this.plotlyGraphRef} 
         />
