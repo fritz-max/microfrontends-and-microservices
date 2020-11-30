@@ -2,11 +2,14 @@
   "name": "imu_mfe",
   "port": 3002,
   "router": "localhost",
-  "subscribeTopics": [
-    "IMU"
-  ],
-  "publishTopics": [], 
-  "rpcTopics": [
-    "IMU/control_measurement"
-  ]
+  "topics": {
+    "subscribeTopics": [
+      "IMU"
+    ],
+    "publishTopics": [], 
+    "callerTopics": [
+      "IMU/control_measurement"
+    ],
+    "calleeTopics": []
+  }
 }

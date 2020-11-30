@@ -1,9 +1,7 @@
 import React from "react";
 import ChartjsGraph from './graphs/chartjsGraph';
 import PlotlyGraph from "./graphs/plotlyGraph";
-
-import Wamp from './connection/Wamp';
-import ConnectionSettings from "./connection/connectionSettings";
+import { Wamp, ConnectionSettings } from './Connection';
 
 class Service extends React.Component {
   constructor() {
@@ -50,30 +48,33 @@ class Service extends React.Component {
           {
               x: [],
               y: [],
-              type: 'line',
-              name: 'data1'
+              type: 'scattergl',
+              name: 'data1',
+              mode: 'lines+markers'
           },
           {
               x: [],
               y: [],
-              type: 'line',
-              name: 'data2'
+              type: 'scattergl',
+              name: 'data2',
+              mode: 'lines+markers'
           },
           {
               x: [],
               y: [],
-              type: 'line',
-              name: 'data3'
+              type: 'scattergl',
+              name: 'data3',
+              mode: 'lines+markers'
           }
       ]
   };
     
     this.updatePlotData = this.updatePlotData.bind(this)
-    this.handleIMUControl = this.handleIMUControl.bind(this)
+    this.handleIMUControlButton = this.handleIMUControlButton.bind(this)
   }
 
   componentDidMount() {
-    this.wamp.subscribe(this.connectionSettings.subscribeTopics[0], (args) => {
+    this.wamp.subscribe(this.connectionSettings.subscribeTopics["IMU"], (args) => {
       this.updatePlotData(args)
     })
     this.wamp.openConnection();
@@ -96,7 +97,7 @@ class Service extends React.Component {
     
     this.state.chartjsData.datasets.forEach((dataset, idx) => {
       dataset.data.push({
-        t: timestamp,
+        x: timestamp,
         y: args[1][idx]
       })
       newChartjsDatasets.push(dataset)
@@ -108,10 +109,11 @@ class Service extends React.Component {
     });
   }
 
-  handleIMUControl() {
-    this.wamp.connection.session.call(this.connectionSettings.rpcTopics[0]).then(returnValue => {
+  handleIMUControlButton() {
+    console.log("RPC Function Call")
+    this.wamp.connection.session.call(this.connectionSettings.callerTopics["IMU/control_measurement"]).then(returnValue => {
       this.wamp.connection.session.log("RPC Called. Returned: ", returnValue);
-  });
+    });
   }
 
   render() {
@@ -120,7 +122,7 @@ class Service extends React.Component {
         {backgroundColor: "WhiteSmoke", textAlign: "center"}
       }>
         <h1>Microfrontend</h1>
-        <div style={{width: "750px"}}>
+        <div style={{width: "750px", justifyContent: "center"}}>
           <ChartjsGraph 
             data={this.state.chartjsData}
           />
@@ -128,7 +130,8 @@ class Service extends React.Component {
           <PlotlyGraph  
             data={this.state.plotlyData}
           />
-        <button onClick={this.handleIMUControl}>[RPC] IMU Control</button>
+          <p></p>
+        <button onClick={this.handleIMUControlButton}>[RPC] IMU Control</button>
       </div>
     );
   }
