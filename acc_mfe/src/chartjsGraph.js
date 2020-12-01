@@ -3,45 +3,46 @@ import {Line, Chart} from 'react-chartjs-2';
 import 'chartjs-plugin-streaming';
 
 
-const initialOptions = {
-    scales: {
-      xAxes: [{
-        type: 'realtime',
-        realtime: {
-            duration: 10000,    // data in the past 20000 ms will be displayed
-            refresh: 200,      // onRefresh callback will be called every 1000 ms
-            delay: 500,        // delay of 1000 ms, so upcoming values are known before plotting a line
-            pause: false,       // chart is not paused
-          },
-        time: {
-            parser: "hh:mm:ss",
-            unit: "second",
-            stepsize: 5
-        }
-      }],
-      yAxes: [{
-          type: 'linear'
-      }]
-    },
-    plugins: {
-        streaming: {
-            frameRate: 30
-        }
-    },
-    animation: {
-        duration: 0
-    },
-    tooltips: {enabled: false},
-    hover: {mode: null}
-};
-
 class ChartjsGraph extends React.Component {
     constructor (props) {
         super()
+
+        // State handles the chartjs configuration
         this.state = {
-            graphOptions: initialOptions
+            graphOptions: {
+                scales: {
+                  xAxes: [{
+                    type: 'realtime',
+                    realtime: {
+                        duration: 10000,    // data in the past 20000 ms will be displayed
+                        refresh: 200,      // onRefresh callback will be called every 1000 ms
+                        delay: 500,        // delay of 1000 ms, so upcoming values are known before plotting a line
+                        pause: false,       // chart is not paused
+                      },
+                    time: {
+                        parser: "hh:mm:ss",
+                        unit: "second",
+                        stepsize: 5
+                    }
+                  }],
+                  yAxes: [{
+                      type: 'linear'
+                  }]
+                },
+                plugins: {
+                    streaming: {
+                        frameRate: 30
+                    }
+                },
+                animation: {
+                    duration: 0
+                },
+                tooltips: {enabled: false},
+                hover: {mode: null}
+            }
         }
 
+        // React specific function binding
         this.handleAxisTypeToggle = this.handleAxisTypeToggle.bind(this);
     }
 
@@ -51,6 +52,7 @@ class ChartjsGraph extends React.Component {
         this.setState({graphOptions: newStateOptions})
     }
 
+    // This chart component, as opposed to plotly, receives the data as "props" from the service (React-specifics)
     render() {
         return (
             <div>

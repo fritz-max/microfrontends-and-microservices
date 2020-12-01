@@ -6,6 +6,7 @@ class PlotlyGraph extends React.Component {
     constructor() {
         super();
 
+        // State of the component handles the Plotly.js specific dataset, layout and config objects
         this.state = {
             datasets: [
                 {
@@ -67,6 +68,7 @@ class PlotlyGraph extends React.Component {
             }
         }
 
+        // React specific function bindings
         this.onUpdate = this.onUpdate.bind(this)
         this.updatePlotData = this.updatePlotData.bind(this)
     }
@@ -74,7 +76,7 @@ class PlotlyGraph extends React.Component {
     onUpdate (figure) {
         var layout = figure.layout
 
-        // scrolling x-Axis
+        // update the layout to scroll the x-Axis
         var olderTime = figure.data[0].x[(figure.data[0].x.length <= 50) ? 0 : figure.data[0].x.length-50]
         var futureTime = figure.data[0].x[figure.data[0].x.length-1]
         layout.xaxis.range = [ olderTime, futureTime ]
@@ -84,6 +86,7 @@ class PlotlyGraph extends React.Component {
     }
 
     updatePlotData (newData) {
+        // update function that is registered as the callback to the wamp subscription. Updates dataset state
         var newDatasets = []
         var timestamp = new Date()
         

@@ -8,6 +8,7 @@ class Service extends React.Component {
     this.wamp = new Wamp()
     this.connectionSettings = new ConnectionSettings()
     
+    // Service state handles datasets, that will be passed down to chart component in render function
     this.state = {
       chartjsData: {
         datasets: [
@@ -45,11 +46,13 @@ class Service extends React.Component {
       }
     };
     
+    // React specific function bindings
     this.updatePlotData = this.updatePlotData.bind(this)
     this.handleACCControl = this.handleACCControl.bind(this)
   }
 
   componentDidMount() {
+    // Register this services update Function to wamp subscription
     this.wamp.subscribe(this.connectionSettings.subscribeTopics["ACC"], (args) => {
       this.updatePlotData(args)
     })
@@ -61,6 +64,7 @@ class Service extends React.Component {
   }
 
   updatePlotData(args) {
+    // Updating the state of the service component with new data
     var newChartjsDatasets = []
     var timestamp = new Date()
     
