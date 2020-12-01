@@ -4,6 +4,8 @@ const config = require("../config.json");
 
 export class ConnectionSettings {
     constructor() {
+        // Read in config file and expose respective URL, Realm, Topics
+
         this.url = "ws://"+config.router+":8080/ws"
         this.realm = "realm"
         this.subscribeTopics = {}
@@ -30,6 +32,7 @@ export class ConnectionSettings {
 }
 
 export class Wamp {
+    // Abstract away the specifics of wamp/autobahn
     constructor() {
         this.connectionSettings = new ConnectionSettings()
         this.connection = new autobahn.Connection({
