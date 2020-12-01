@@ -5,7 +5,7 @@ dist/
 __pycache__
 
 # h5 data from Skytem
-*.h5
+# *.h5
 
 key.priv
 key.pub
