@@ -28,5 +28,5 @@ class MicroService:
         self.caller_topics = caller
         self.callee_topics = callee
 
-def load_ms_model(path='model.json'):
+def load_ms_model(path='config.json'):
     return MicroService(path)

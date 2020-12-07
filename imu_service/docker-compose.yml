@@ -1,0 +1,11 @@
+version: "3.3"
+services:
+
+  ms_prototype:
+    image: ms_prototype
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes: 
+      - ".:/app"
+    command: python -u /app/service.py
