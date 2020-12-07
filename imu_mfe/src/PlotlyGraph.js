@@ -13,31 +13,32 @@ class PlotlyGraph extends React.Component {
                     x: [],
                     y: [],
                     type: 'scattergl',
-                    name: 'data1',
+                    name: 'x-axis',
                     mode: 'lines+markers'
                 },
                 {
                     x: [],
                     y: [],
                     type: 'scattergl',
-                    name: 'data2',
+                    name: 'y-axis',
                     mode: 'lines+markers'
                 },
                 {
                     x: [],
                     y: [],
                     type: 'scattergl',
-                    name: 'data3',
+                    name: 'z-axis',
                     mode: 'lines+markers'
                 }
             ],
             layout: {
+                title: "Rotational Velocity [deg/s]",
                 showlegend: true,
                 autosize: false,
                 width: 1000,
                 height: 500,
                 margin: {
-                    l: 50,
+                    l: 75,
                     r: 50,
                     b: 75,
                     t: 50,
@@ -51,11 +52,13 @@ class PlotlyGraph extends React.Component {
                 },
                 yaxis: {
                     type: "linear",
-                    fixedrange: true
+                    fixedrange: true,
+                    title: "Rotational Velocity"
                 }
             }, 
             config: {
-                scrollZoom: true,
+                scrollZoom: false,
+                displaylogo: false,
                 modeBarButtonsToAdd: [
                     {
                         name: "Y-Axis Type Toggle",
@@ -64,6 +67,9 @@ class PlotlyGraph extends React.Component {
                             return {layout: {yaxis: {type: (oldState.layout.yaxis.type === "linear") ? "log" : "linear"}}}
                         })}
                     }
+                ],
+                modeBarButtonsToRemove: [
+                    "toImage", "toggleSpikelines", "select2d", "lasso2d"
                 ]
             }
         }

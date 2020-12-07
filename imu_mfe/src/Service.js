@@ -41,12 +41,13 @@ class Service extends React.Component {
       <div style={
         {backgroundColor: "WhiteSmoke", textAlign: "center"}
       }>
-        <h1>Microfrontend</h1>
+        <h1 style={{fontFamily: "sans-serif"}}>IMU Instrument</h1>
         <PlotlyGraph 
           ref={this.plotlyGraphRef} 
         />
         <p></p>
         <button onClick={this.handleIMUControlButton}>[RPC] IMU Control</button>
+        <p></p>
       </div>
     );
   }
