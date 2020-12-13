@@ -44,24 +44,24 @@ services:
     environment:
     - CHOKIDAR_USEPOLLING=true
 
-  acc_service:
-    image: acc_service
-    build:
-      context: ./acc_service
-      dockerfile: Dockerfile
-    volumes: 
-      - "./acc_service:/app"
-    command: python -u /app/service.py
+  # acc_service:
+  #   image: acc_service
+  #   build:
+  #     context: ./acc_service
+  #     dockerfile: Dockerfile
+  #   volumes: 
+  #     - "./acc_service:/app"
+  #   command: python -u /app/service.py
     
-  acc_mfe:
-    image: acc_mfe
-    build:
-      context: ./acc_mfe
-      dockerfile: Dockerfile
-    volumes:
-    - ./acc_mfe:/app
-    - /app/node_modules
-    ports:
-    - 3003:3003
-    environment:
-    - CHOKIDAR_USEPOLLING=true
+  # acc_mfe:
+  #   image: acc_mfe
+  #   build:
+  #     context: ./acc_mfe
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #   - ./acc_mfe:/app
+  #   - /app/node_modules
+  #   ports:
+  #   - 3003:3003
+  #   environment:
+  #   - CHOKIDAR_USEPOLLING=true
