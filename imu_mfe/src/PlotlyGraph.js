@@ -77,7 +77,7 @@ class PlotlyGraph extends React.Component {
         var layout = figure.layout
 
         // update the layout to scroll the x-Axis
-        var olderTime = figure.data[0].x[(figure.data[0].x.length <= 50) ? 0 : figure.data[0].x.length-50]
+        var olderTime = figure.data[0].x[(figure.data[0].x.length <= 200) ? 0 : figure.data[0].x.length-200]
         var futureTime = figure.data[0].x[figure.data[0].x.length-1]
         layout.xaxis.range = [ olderTime, futureTime ]
  

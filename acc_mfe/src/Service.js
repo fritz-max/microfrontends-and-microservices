@@ -88,7 +88,7 @@ class Service extends React.Component {
       <div style={
         {backgroundColor: "WhiteSmoke", textAlign: "center"}
       }>
-        <h1>Microfrontend</h1>
+        <h1 style={{fontFamily: "sans-serif"}}>ACC Instrument</h1>
         <div style={{width: "750px"}}>
           <ChartjsGraph 
             data={this.state.chartjsData}
